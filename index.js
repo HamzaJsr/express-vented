@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
+import userRoutes from "./routes/user.js";
 import "dotenv/config";
 
 const app = express();
@@ -30,11 +31,11 @@ const connectDB = async () => {
   }
 };
 
-const userSchema = mongoose.Schema();
+// Appel à la fonction de connexion à MongoDB
+connectDB();
 
-app.post("/user/signup", (req, res) => {
-  res.status(200).json("Test Valide ");
-});
+// Utiliser les routes d'utilisateur
+app.use(userRoutes);
 
 // Route inexistantes
 app.all("*", function (req, res) {
