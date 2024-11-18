@@ -1,8 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
+import { v2 as cloudinary } from "cloudinary";
 import userRoutes from "./routes/user.js";
+import offerRoutes from "./routes/offer.js";
 import "dotenv/config";
+import fileUpload from "express-fileupload";
+import cors from "cors";
 
 const app = express();
 
@@ -34,8 +38,16 @@ const connectDB = async () => {
 // Appel à la fonction de connexion à MongoDB
 connectDB();
 
+// Connexion à l'espace de stockage cloudinary
+cloudinary.config({
+  cloud_name: "dlge1bt5l",
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 // Utiliser les routes d'utilisateur
 app.use(userRoutes);
+app.use(offerRoutes);
 
 // Route inexistantes
 app.all("*", function (req, res) {

@@ -29,13 +29,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: null, // Par défaut, il n'y a pas de token
     },
-    hash: {
-      type: String,
-      default: null, // Par défaut, pas de hash
-    },
     salt: {
       type: String,
       default: null, // Par défaut, pas de salt
+    },
+    hash: {
+      type: String,
+      default: null, // Par défaut, pas de hash
     },
   },
   {
